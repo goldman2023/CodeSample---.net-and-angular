@@ -1,0 +1,106 @@
+.btn-warning {
+    color: #fff;
+    background-color: #db7452;
+    border-color: #db7452;
+    box-shadow: 0 7px 13px 0 rgba(219, 116, 82, 0.47);
+}
+
+.app.combined .modal-dialog .modal-content .modal-header {
+    border-top-left-radius: 0.2rem;
+    border-top-right-radius: 0.2rem;
+    padding: 10px 15px;
+    background: #4e7e84;
+    color: #fff;
+}
+
+.close {
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+}
+
+.modal.show .modal-dialog {
+    -webkit-transform: translate(0, 0);
+    transform: translate(0, 0);
+    -webkit-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    -moz-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    -ms-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    -o-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.close:not(:disabled):not(.disabled):hover,
+.close:not(:disabled):not(.disabled):focus {
+    color: #bbb;
+    text-decoration: none;
+    opacity: .75;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    color: #ffffff !important;
+    border: 1px solid #db7452;
+    background-color: white;
+    background: linear-gradient(to bottom, #db7452 0%, #db7452 100%);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    color: white !important;
+    border: 1px solid #db7452;
+    background-color: #db7452;
+    background: linear-gradient(to bottom, #e0967e 0%, #cc9380 100%);
+}
+
+table.dataTable {
+    width: 100% !important;
+    margin: 0 auto;
+    clear: both;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.table-bordered thead th,
+.table-bordered thead td {
+    color: #db7452;
+}
+
+.table-bordered th,
+.table-bordered td {
+    color: #565656;
+}
+
+.btn-warning {
+    background-color: #db7452;
+    box-shadow: 0 7px 13px 0 rgba(219, 116, 82, 0.47);
+}
+
+.breadcrumb {
+    background-color: #ffffff;
+    box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.15);
+}
+
+.app.combined .breadcrumb a {
+    color: #db7452;
+}
+
+.app.combined .btn-warning {
+    color: #fff;
+    background-color: #db7452;
+    border-color: #db7452;
+}
+
+.app.combined .form-control.validation-field.ng-touched.ng-valid {
+    border-color: #ced4da;
+    background-image: none;
+}
+
+thead th{
+    padding: 10px 10px !important;
+    border-bottom: 2px solid #9d9d9d36 !important;
+    background-color: #f7f7f7 !important;
+    color: #4e7e84 !important;
+}

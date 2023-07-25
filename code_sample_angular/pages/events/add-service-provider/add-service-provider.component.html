@@ -1,0 +1,159 @@
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex bd-highlight align-items-center justify-content-between">
+            <div class="p-2 flex-fill w-50 bd-highlight">
+                <h5 class="h5-food m-0">Service Providers - {{eventName}}</h5>
+            </div>
+            <div class="p-2 flex-shrink-1 bd-highlight">
+                <button *ngIf="!expired" type="button" class="btn btn-rounded btn-warning w-100p mb-3 mr-2" data-toggle="modal"
+                    data-target=".bd-example-modal-lg">Invite</button>
+                    <button *ngIf="serviceProvider.length" type="button" class="btn btn-rounded btn-warning w-100p mb-3 mr-2" (click)="csv()"
+                   >Export csv</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="card text-left bg-primary-food">
+            <div class="card-body p-0 m-0">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Email Address</th>
+                                <th scope="col">Restaurant Name</th>
+                                <th scope="col">Tickets Collected</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Reports</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let each of serviceProvider">
+                                <td>{{each.first_name}}</td>
+                                <td>{{each.last_name}}</td>
+                                <td>{{each.email}}</td>
+                                <td>{{each.restaurant_name}}</td>
+                                <td>{{each.tickets_collected}}</td>
+                                <td>{{each.status}}</td>
+
+                                <td class="text-center">
+                                    <a ngbTooltip="Reports" [routerLink]="['/events/serviceProvider_report',each.sp_id,id,eventName]"><i class="fa fa-bar-chart mr-3 text-secondary"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="serviceProvider?.length == 0">
+                            <tr>
+                                <td *ngIf="!noDataStyle" style="height:150px" colspan="8" class="no-data-available text-center">
+                                    <div class="browser-screen-loading-content">
+                                        <img src="assets/img/app/logo-foodeaze.png" class="img-fluid"
+                                            style="height: 50px; ">
+                                        <div class="loading-dots dark-gra"></div>
+                                    </div>
+                                </td>
+                                <td *ngIf="noDataStyle" colspan="8" class="no-data-available text-center">No
+                                    data!</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Service Providers</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12">
+                    <form #form="ngForm" (ngSubmit)="search(form)">
+                        <div class="form-row">
+                            <div class="col-12 col-sm-6 col-xl-3 pt-2"><label for="inputEmail4">First Name</label>
+                                <input ngModel name="first_name" #first_name type="text" class="form-control"
+                                    placeholder="First Name">
+                            </div>
+                            <div class="col-12 col-sm-6 col-xl-3 pt-2"><label for="inputEmail4">Last Name</label>
+                                <input ngModel name="last_name" #last_name type="text" class="form-control" placeholder="Last Name">
+                            </div>
+                            <div class="col-12 col-sm-6 col-xl-3 pt-2"><label for="inputEmail4">Email Address</label>
+                                <input ngModel name="email" #email type="email" class="form-control validation-field"
+                                    placeholder="Email Address" email>
+                            </div>
+                            <div class="col-12 col-sm-6 col-xl-3 pt-2"><label for="inputEmail4">Restaurant Name</label>
+                                <input ngModel name="restaurant_name" #restaurant_name type="text" class="form-control validation-field"
+                                    placeholder="Restaurant Name">
+                            </div>
+                            <div class="col-12 col-sm-6 col-xl-6 pt-2"><label for="inputEmail4">Address</label>
+                                <input ngModel name="address" #address type="text" class="form-control validation-field"
+                                    placeholder="Address">
+                            </div>
+                            <div class="col-12 col-sm-6 col-xl-3 pt-2"><label for="inputEmail4">City</label>
+                                <input ngModel name="city" #city type="text" class="form-control validation-field"
+                                    placeholder="City">
+                            </div>
+                            <div class="col-12 col-sm-6 col-xl-3 pt-2"><label for="inputEmail4">State</label>
+                                <input ngModel name="state" #state type="text" class="form-control validation-field"
+                                    placeholder="State">
+                            </div>
+                            <div class="col-12 pt-3 align-self-end">
+                                <button class="btn btn-rounded btn-warning w-100p pull-right mr-2">Search</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="text-left bg-primary-food pt-3">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-sm" id="datatables">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col">First Name</th>
+                                        <th scope="col">Last Name</th>
+                                        <th scope="col">Email Address</th>
+                                        <th scope="col">Restaurant Name</th>
+                                        <th scope="col">Address</th>
+                                        <th scope="col">City</th>
+                                        <th scope="col">State</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="serviceProviderAdd?.length != 0">
+                                    <tr *ngFor="let each of serviceProviderAdd;index as i">
+                                        <th scope="row">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" [checked]="each.is_checked" type="checkbox"
+                                                    id="inlineCheckbox1" value="option1" (click)="addRemoveSP($event,each.sp_id,each.user_id)">
+                                            </div>
+                                        </th>
+                                        <td>{{each.first_name}}</td>
+                                        <td>{{each.last_name}}</td>
+                                        <td>{{each.email}}</td>
+                                        <td>{{each.restaurant_name}}</td>
+                                        <td>{{each.address}}</td>
+                                        <td>{{each.city}}</td>
+                                        <td>{{each.state}}</td>
+                                    </tr>
+                                </tbody>
+                                <tbody *ngIf="serviceProviderAdd?.length == 0">
+                                    <tr>
+                                        <td *ngIf="!noDataStyle" style="height:200px" colspan="8" class="no-data-available text-center"></td>
+                                        <td *ngIf="noDataStyle" colspan="8" class="no-data-available text-center">No
+                                            data!</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-rounded btn-warning w-100p mr-2" data-dismiss="modal" (click)="invite()">Invite</button>
+                <button class="btn btn-rounded btn-danger w-100p mr-2" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

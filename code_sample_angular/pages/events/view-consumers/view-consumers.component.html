@@ -1,0 +1,156 @@
+<div class="col-12 p-0">
+    <div class="d-flex bd-highlight align-items-center justify-content-between">
+        <div class="p-2 flex-fill w-80 bd-highlight">
+            <h5 class="h5-food m-0">Consumers</h5>
+        </div>
+        <div class="p-2 flex-shrink-1 bd-highlight">
+            <button *ngIf="eventConsumerList.length" type="button" class="btn btn-rounded btn-warning w-200p mb-3 mr-2"
+                (click)="csv()">Export csv</button>
+            <button *ngIf="eventConsumerList.length" class="btn btn-rounded btn-info w-100p mb-3 mr-2" type="button"
+                (click)="captureScreen()">Export</button>
+        </div>
+    </div>
+</div>
+<div class="col-12 p-0">
+    <div class="card text-left">
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Email Address</th>
+                        <th scope="col">Tickets Purchased</th>
+                        <th scope="col">Tickets Used</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="eventConsumerList?.length != 0">
+                    <tr *ngFor="let each of eventConsumerList">
+                        <th>{{each.first_name}}</th>
+                        <th>{{each.last_name}}</th>
+                        <th>{{each.email}}</th>
+                        <th>{{each.tickets_purchased}}</th>
+                        <th>{{each.tickets_used}}</th>
+                        <td>
+                            <a (click)="details(each.id)" class="pointer" ngbTooltip="Earnings and Redeem"><i class="fa fa-eye mr-3 text-secondary"></i></a>
+                            <a [routerLink]="['/events/event_details',id,'viewConsumers_report',eventName,'refund',each.id]" ngbTooltip="Refund"><i class="fa fa-money mr-3 text-secondary"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="eventConsumerList?.length == 0">
+                    <tr>
+                        <td *ngIf="!noDataStyle" style="height:170px" colspan="6" class="no-data-available text-center">
+                            <div class="browser-screen-loading-content">
+                                <img src="assets/img/app/logo-foodeaze.png" class="img-fluid" style="height: 50px; ">
+                                <div class="loading-dots dark-gra"><i></i><i></i><i></i><i></i></div>
+                            </div>
+                        </td>
+                        <td *ngIf="noDataStyle" colspan="6" class="no-data-available text-center">No
+                            data!</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="disableContent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-medium modal_width redeem_history">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Earnings and Redeem History</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    x
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row pt-3">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <nav>
+                                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                        <a aria-controls="nav-food" aria-selected="true" class="nav-item nav-link active show"
+                                            data-toggle="tab" href="#nav-food" id="nav-food-tab" role="tab">Earnings</a>
+                                        <a aria-controls="nav-beverage" aria-selected="false" class="nav-item nav-link"
+                                            data-toggle="tab" href="#nav-beverage" id="nav-beverage-tab" role="tab">Redeem
+                                            History</a>
+                                    </div>
+                                </nav>
+                                <div class="tab-content border-0" id="nav-tabContent">
+                                    <div aria-labelledby="nav-food-tab" class="tab-pane fade active show" id="nav-food"
+                                        role="tabpanel">
+                                        <div class="col-12">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Ticket Name</th>
+                                                            <th scope="col">Tickets/set</th>
+                                                            <th scope="col">Price($)</th>
+                                                            <th scope="col">Sets purchased</th>
+                                                            <th scope="col">Total Tickets</th>
+                                                            <th scope="col">Total Price($)</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let each of eventConsumerEarnings?.table">
+                                                            <td>{{each.ticket_name}}</td>
+                                                            <td>{{each.no_of_tickets}}</td>
+                                                            <td>{{each.price}}</td>
+                                                            <td>{{each.qty_purchased}}</td>
+                                                            <td>{{each.total_tickets}}</td>
+                                                            <td>{{each.total_price}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 text-right">
+                                            <h2>Total: ${{eventConsumerEarnings.total}}</h2>
+                                        </div>
+                                    </div>
+                                    <div aria-labelledby="nav-beverage-tab" class="tab-pane fade" id="nav-beverage"
+                                        role="tabpanel">
+                                        <div class="table-responsive">
+
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Date</th>
+                                                        <th scope="col">Time</th>
+                                                        <th scope="col">Activity</th>
+                                                        <th scope="col">Activity Type</th>
+                                                        <th scope="col">Amount($)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let each of eventConsumerRedeem">
+                                                        <th>{{each.date}}</th>
+                                                        <th>{{each.time}}</th>
+                                                        <th>{{each.activity}}</th>
+                                                        <th>{{each.activity_type}}</th>
+                                                        <th [ngStyle]="{'color':each.is_negative? 'red' : 'green'}">{{each.amount}}</th>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-outline-dark">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div size="A4" style="opacity:0.0">
+    <div class="column p-5" id="logo">
+        <img src="assets/img/app/logo-foodeaze2.png" alt="">
+    </div>
+</div>

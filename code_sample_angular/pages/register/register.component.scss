@@ -1,0 +1,70 @@
+.login-container {
+    position: absolute;
+    .card {
+        .card-header {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+            margin-top: -40px;
+            border-radius: 50%;
+            font-size: 36px;
+        }
+    }
+}
+
+.backgroud-login {
+    background-image: url("/assets/img/app/foodbg.jpg");
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    top: 0;
+    left: 0;
+    .white-bg {
+        background-color: white;
+        box-shadow: -60px 0px 100px -90px #000000, 60px 0px 100px -90px #000000;
+    }
+}
+
+.app.combined .login-container .card,
+.app.combined .register-container .card,
+.app.combined .error-container .card {
+    background-color: #ffffff;
+    color: #5d5d5d;
+}
+
+.app.combined .box-shadow {
+    box-shadow: 0px 1px 4px 0px rgba(255, 255, 255, 0.3);
+}
+
+.login-container .card .card-header {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    margin-top: 0px;
+    border-radius: 50%;
+    font-size: 36px;
+}
+
+.app.combined .login-container .card .btn {
+    background-color: #db7452;
+    color: #efefef;
+    padding: 15px;
+    border-radius: 35px;
+    box-shadow: 0 7px 13px 0 rgba(219, 116, 82, 0.47);
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 22px;
+}
+
+.login-container .card .card-header {
+    width: 60%;
+    height: 80px;
+    margin: 0 auto;
+    margin-top: 0px;
+    font-size: 36px;
+}
+
+.app.combined .login-container .card .card-header {
+    background-color: rgba(255, 255, 255, 0.1);
+}

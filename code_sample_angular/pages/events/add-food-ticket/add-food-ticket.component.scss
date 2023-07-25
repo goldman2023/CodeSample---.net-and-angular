@@ -1,0 +1,61 @@
+ .btn-warning {
+     color: #fff;
+     background-color: #db7452;
+     border-color: #db7452;
+     box-shadow: 0 7px 13px 0 rgba(219, 116, 82, 0.47);
+ }
+
+ .modal-form {
+    width: 142% !important;}
+    .modal {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1000 !important;
+        display: none;
+        overflow: hidden;
+        outline: 0;
+    }
+   .cdk-overlay-container {
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        display: contents !important;
+    }
+    .modal-backdrop {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 985 !important;
+        background-color: #000;
+    }
+.ui-calendar {
+    position: relative;
+    display: inline-block;
+    width: 100% !important;
+}
+body .ui-calendar.ui-calendar-w-btn .ui-inputtext {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: 0 none;
+    width: 100% !important;
+    position: absolute !important;
+}
+body .ui-calendar.ui-calendar-w-btn .ui-datepicker-trigger.ui-button {
+    width: 2.357em;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    float: right !important;
+}
+.time-picker{
+    width: 100%;
+}
+
+.app.combined .breadcrumb a {
+    color: #db7452;
+}

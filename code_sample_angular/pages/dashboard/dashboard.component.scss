@@ -1,0 +1,63 @@
+.app.combined .bg-primary-food {
+    border-radius: 6px;
+	background-color: #FFFFFF  !important;
+    box-shadow: 0 2px 15px 0 rgba(0,0,0,0.15);
+    .card-title-food{
+	color: #4bae4f;
+	font-size: 24px;
+	font-weight: bold;
+	line-height: 23px;
+    }
+    .card-text-food{
+	color: #9C9999;
+	font-size: 12px;
+	line-height: 23px;
+    }
+    .h5-food{
+	color: #464E57;
+	font-size: 16px;
+	font-weight: bold;
+    line-height: 23px;
+    }   
+}
+.box-food{
+	border-radius: 6px;
+	background-color: #FFFFFF;
+    box-shadow: 0 2px 15px 0 rgba(0,0,0,0.15);
+    img {
+        width: 83px;
+        height: 83px;
+        object-fit: cover;
+        border-radius: 6px
+    }
+    h5{
+	color: #DB7452;
+	font-size: 16px;
+	font-weight: bold;
+    line-height: 23px;
+    }
+    span{
+	color: #343D46;
+	font-size: 14px;
+	line-height: 23px;
+    }
+    p{
+	color: #9C9999;
+	font-size: 14px;
+	line-height: 23px;
+    }
+}
+.breadcrumb {
+    background-color: #ffffff;
+    box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.15);
+}
+.browser-screen-loading-content {
+    text-align: center;
+    height: 2em;
+    max-width: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 3em;
+    margin: auto;
+}

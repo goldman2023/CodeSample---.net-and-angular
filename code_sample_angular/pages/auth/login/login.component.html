@@ -1,0 +1,75 @@
+<div class="backgroud-login">
+    <div class="d-flex justify-content-center align-items-center w-100 h-100 login-container">
+        <div class="col-xl-8 d-none d-lg-block"></div>
+        <div class="col-xl-4 col-md-6 col-sm-8 col-12 white-bg h-100 d-flex align-items-center justify-content-center">
+            <div class="p-md-5 p-0 card border-0 box-shadow rounded-0">
+                <div class="card-header d-flex justify-content-center align-items-center border-0 box-shadow">
+                    <img src="assets/img/app/logo-foodeaze.png" class="img-fluid" alt="Responsive image">
+                </div>
+                <div class="card-body text-center pb-1">
+                    <div class="p-3">
+                        <h4 *ngIf="!forgotPassword">Admin Portal</h4>
+                        <h4 *ngIf="forgotPassword">Forgot Password</h4>
+                    </div>
+                    <div class="alert alert-danger alert-dismissible fade show" *ngIf="invalid_credentials" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="invalid_credentials=false">
+                            <span aria-hidden="true">&times;</span>
+                        </button> {{invalid_credentials}}
+                    </div>
+                    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="text-left" *ngIf="!forgotPassword">
+                        <div class="form-group mt-4 mb-4">
+                            <i class="fa fa-envelope-o position-absolute m-3" aria-hidden="true"></i>
+                            <input [formControl]="email" class="form-control validation-field pl-5" placeholder="Email"
+                                type="text">
+                            <small class="text-danger" *ngIf="form.get('email').touched && form.get('email').hasError('required')">Email
+                                is required</small>
+                            <small class="text-danger" *ngIf="form.get('email').touched && form.get('email').hasError('email')">Invalid
+                                email address</small>
+                        </div>
+                        <div class="form-group mt-4 mb-4">
+                            <i class="fa fa-key position-absolute m-3" aria-hidden="true"></i>
+                            <input [formControl]="password" class="form-control validation-field pl-5" placeholder="Password"
+                                type="password">
+                            <small class="text-danger" *ngIf="form.get('password').touched && form.get('password').hasError('required')">Password
+                                is required</small>
+                            <small class="text-danger" *ngIf="form.get('password').touched && form.get('password').hasError('minlength')">Password
+                                isn't long enough, minimum of 6 characters</small>
+                        </div>
+                        <div class="form-group d-flex justify-content-between mb-5 mt-3">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="login-checkbox">
+                                <label class="custom-control-label" for="login-checkbox">Remember Me</label>
+                            </div>
+                            <a class="transition pull-right" href="javascript:void(0);" (click)="forgotPassword=true;invalid_credentials=false">Forgot
+                                password?</a>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-warning btn-block" type="submit">Sign in</button>
+                        </div>
+                    </form>
+                    <form #form1="ngForm" (ngSubmit)="forgot_password(form1)" class="text-left" *ngIf="forgotPassword">
+                        <div class="form-group mt-4 mb-4">
+                            <label for="inputEmail4">Email Address</label>
+                            <input ngModel name="email" maxlength="100" #email type="email" class="form-control validation-field"
+                                placeholder="Email Address" email>
+                            <small class="text-danger position-absolute" *ngIf="form1.controls.email?.invalid && form1.controls.email.touched">Invalid
+                                email address
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button class="btn btn-block" type="submit">Send</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn btn-block" type="button" (click)="forgotPassword=false;invalid_credentials=false">cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

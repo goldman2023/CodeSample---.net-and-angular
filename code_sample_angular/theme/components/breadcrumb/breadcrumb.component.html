@@ -1,0 +1,6 @@
+<ol class="breadcrumb">  
+    <li *ngFor="let breadcrumb of breadcrumbs; let i = index;" class="breadcrumb-item">
+        <a [hidden]="i == (breadcrumbs.length - 1)" [routerLink]="[breadcrumb.url]">{{breadcrumb.name}}</a>          
+        <span [hidden]="i != (breadcrumbs.length - 1)"><i *ngIf="router.url == '/pages/dashboard'" class="fa fa-home mr-2"></i><b>{{breadcrumb.name}}</b></span>
+    </li>
+</ol>

@@ -1,0 +1,18 @@
+<div class="modal fade" id="myModalXmlView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-medium modal_width">
+    <div class="modal-content">
+      <div class="modal-header">
+        <ng-content select=".modal-title"></ng-content>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          x
+        </button>
+      </div>
+      <div class="modal-body">
+        <ng-content></ng-content>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-outline-dark" (click)="getId(id)">OK</button>
+      </div>
+    </div>
+  </div>
+</div>

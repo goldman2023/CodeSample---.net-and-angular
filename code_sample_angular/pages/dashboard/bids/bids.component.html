@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex bd-highlight align-items-center justify-content-between">
+            <div class="p-2 flex-fill w-100 bd-highlight">
+                <h5 class="h5-food m-0" *ngIf="bidStatus == 'bids'">Active Bids</h5>
+                <h5 class="h5-food m-0" *ngIf="bidStatus == 'accepted_bids'">Accepted Bids</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="card text-left bg-primary-food">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-sm m-0" id="datatables">
+                        <thead>
+                            <tr>
+                                <th>Order Id</th>
+                                <th>Business Name</th>
+                                <th>User Name</th>
+                                <th>Amount($)</th>
+                                <th>Order Type</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="totalBidsList?.length != 0" class="body">
+                            <tr *ngFor="let each of totalBidsList;index as i">
+
+                                <td>{{each.order_id}}</td>
+                                <td>{{each.business_name}}</td>
+                                <td>{{each.user_name}}</td>
+                                <td>{{each.amount}}</td>
+                                <td>{{each.service}}</td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="totalBidsList?.length == 0" class="b">
+                            <tr>
+                                <td *ngIf="!noDataStyle" style="height:200px" colspan="5" class="no-data-available text-center"></td>
+                                <td *ngIf="noDataStyle" colspan="5" class="no-data-available text-center">No data!</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

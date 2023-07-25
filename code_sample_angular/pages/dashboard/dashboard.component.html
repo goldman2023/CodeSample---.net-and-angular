@@ -1,0 +1,193 @@
+<div class="row" *ngIf="listStates.length!=0">
+        <div class="col-12">
+                <div class="d-flex bd-highlight align-items-center justify-content-between">
+                        <div class="p-2 flex-fill w-80 bd-highlight">
+                                <h5 class="h5-food m-0">Reports</h5>
+                        </div>
+                        <select [(ngModel)]="time" (ngModelChange)="filter()"
+                                class="custom-select mw-100 w-25 ng-pristine ng-valid ng-touched"
+                                ng-reflect-model="select">
+                                <option disabled value="" ng-reflect-value="none">Filter by Time</option>
+                                <option value="" ng-reflect-value="none">All</option>
+                                <option value="week" ng-reflect-value="none">Week</option>
+                                <option value="month" ng-reflect-value="none">Month</option>
+                                <option value="year" ng-reflect-value="none">Year</option>
+                        </select>
+                        <select [(ngModel)]="state" (ngModelChange)="filter()"
+                                class="custom-select mw-100 w-25 ng-pristine ng-valid ng-touched"
+                                ng-reflect-model="select">
+                                <option value="" ng-reflect-value="none">Filter by State</option>
+                                <option ng-reflect-value="select" *ngFor="let state of listStates" [value]="state.id">
+                                        {{state.name}}</option>
+                        </select>
+                </div>
+        </div>
+        <div class="col-12 pb-3 p-2">
+                <div class="d-flex align-content-between flex-wrap bd-highlight">
+                        <app-card class="p-2 flex-fill bd-highlight">
+                                <a style="cursor:pointer" (click)="revenueEarned()">
+                                        <h5 *ngIf="dashboardData?.revenue" class="card-title card-title-food">
+                                                ${{dashboardData.revenue}}</h5>
+                                        <h5 *ngIf="!dashboardData?.revenue" class="card-title card-title-food">$0</h5>
+                                        <p class="card-text card-text-food">Revenue Earned</p>
+                                </a>
+                        </app-card>
+                        <app-card class="p-2 flex-fill bd-highlight">
+                                <a style="cursor:pointer" (click)="orderList()">
+
+                                        <h5 *ngIf="dashboardData?.new_orders" class="card-title card-title-food">
+                                                {{dashboardData.new_orders}}</h5>
+                                        <h5 *ngIf="!dashboardData?.new_orders" class="card-title card-title-food">0</h5>
+                                        <p class="card-text card-text-food">New Orders</p>
+                                </a>
+                        </app-card>
+                        <app-card class="p-2 flex-fill bd-highlight">
+                                <a style="cursor:pointer" (click)="consumerList()">
+                                        <h5 *ngIf="dashboardData?.consumers" class="card-title card-title-food">
+                                                {{dashboardData.consumers}}</h5>
+                                        <h5 *ngIf="!dashboardData?.consumers" class="card-title card-title-food">0</h5>
+
+                                        <p class="card-text card-text-food">Consumers</p>
+                                </a>
+                        </app-card>
+                        <app-card class="p-2 flex-fill bd-highlight">
+                                <a style="cursor:pointer" (click)="providerList()">
+
+                                        <h5 *ngIf="dashboardData?.restaurants" class="card-title card-title-food">
+                                                {{dashboardData.restaurants}}</h5>
+                                        <h5 *ngIf="!dashboardData?.restaurants" class="card-title card-title-food">0
+                                        </h5>
+                                        <p class="card-text card-text-food">Restaurants</p>
+                                </a>
+                        </app-card>
+                        <app-card class="p-2 flex-fill bd-highlight">
+                                <a style="cursor:pointer" (click)="foodTruck()">
+                                        <h5 *ngIf="dashboardData?.foodTruck" class="card-title card-title-food">
+                                                {{dashboardData.foodTruck}}</h5>
+                                        <h5 *ngIf="!dashboardData?.foodTruck" class="card-title card-title-food">0</h5>
+                                        <p class="card-text card-text-food">Food Trucks</p>
+                                </a>
+                        </app-card>
+                        <app-card class="p-2 flex-fill bd-highlight">
+                                <a style="cursor:pointer" (click)="bidsList()">
+                                        <h5 *ngIf="dashboardData?.bids" class="card-title card-title-food">
+                                                {{dashboardData.bids}}</h5>
+                                        <h5 *ngIf="!dashboardData?.bids" class="card-title card-title-food">0</h5>
+                                        <p class="card-text card-text-food">Active Bids</p>
+                                </a>
+                        </app-card>
+                        <app-card class="p-2 flex-fill bd-highlight">
+                                <a style="cursor:pointer" (click)="acceptedBidsList()">
+                                        <h5 *ngIf="dashboardData?.accepted_bids" class="card-title card-title-food">
+                                                {{dashboardData.accepted_bids}}</h5>
+                                        <h5 *ngIf="!dashboardData?.accepted_bids" class="card-title card-title-food">0</h5>
+                                        <p class="card-text card-text-food">Accepted Bids</p>
+                                </a>
+                        </app-card>
+
+                </div>
+        </div>
+        <div class="col-12">
+                <div class="d-flex bd-highlight align-items-center justify-content-between">
+                        <div class="p-2 flex-fill bd-highlight">
+                                <h5 class="h5-food m-0">Upcoming Events</h5>
+                        </div>
+                        <div class="p-2 flex-fill bd-highlight text-right"><a [routerLink]="['/events']">See
+                                        All</a></div>
+                </div>
+        </div>
+        <div class="col-12">
+                <div class="row">
+                        <div class="col-12 col-sm-6 col-md-12 col-lg-6 col-xl-4"
+                                *ngFor="let events of dashboardData.upcoming_events">
+                                <a [routerLink]="['/events/event_details',events.id]">
+
+                                        <div class="box-food p-3 mt-3 mb-4 w-100">
+                                                <div class="media">
+                                                        <a [routerLink]="['/events/event_details',events.id]"> <img
+                                                                        class="align-self-center mr-3"
+                                                                        [src]=events.image></a>
+                                                        <a [routerLink]="['/events/event_details',events.id]"> <img
+                                                                        *ngIf="!events.image"
+                                                                        class="align-self-center mr-3"
+                                                                        src="assets/img/app/no-image.png"></a>
+
+                                                        <div class="media-body text-truncate">
+                                                                <a [routerLink]="['/events/event_details',events.id]">
+                                                                        <h5 class="mt-0 text-truncate">{{events.name}}
+                                                                        </h5>
+                                                                </a>
+                                                                <span *ngIf="events.start_date!=events.end_date">{{events.start_date
+                                                                        | date}} - {{events.end_date | date}}</span>
+                                                                <span *ngIf="events.start_date==events.end_date">{{events.start_date
+                                                                        | date}}</span>
+
+                                                                <p class="text-truncate">{{events.address}}</p>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </a>
+                        </div>
+                </div>
+        </div>
+        <div class="col-12">
+                <div class="row">
+                        <div class="col-12 pb-3 p-2" *ngIf="eventsLength==0">
+                                <div class="d-flex align-content-between flex-wrap bd-highlight">
+                                        <div class="p-2 flex-fill bd-highlight">
+                                                <div class="card text-center text-white bg-primary-food">
+                                                        <div class="card-body">
+                                                                <p class="card-text card-text-food"> No Upcoming Events
+                                                                </p>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+        </div>
+</div>
+<div *ngIf="listStates.length==0">
+        <div class="loader-container">
+                <div class="loader-inner">
+                        <div class="browser-screen-loading-content" style="left:250px">
+                                <img src="assets/img/app/logo-foodeaze.png" class="img-fluid" alt=""
+                                        style="height:100px;">
+                                <div class="loading-dots dark-gray">
+                                        <i></i>
+                                        <i></i>
+                                        <i></i>
+                                        <i></i>
+                                </div>
+                        </div>
+                </div>
+        </div>
+</div>
+<div class="modal fade" id="disableContent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-medium modal_width">
+                <div class="modal-content">
+                        <div class="modal-header">
+                                <h3>Revenue Earned</h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        x
+                                </button>
+                        </div>
+                        <div class="modal-body">
+                                <p>Foodticket Revenue : ${{dashboardData.revenue_details?.foodticket_revenue}}</p>
+                                <p>Foodticket Refund :
+                                        ${{dashboardData.revenue_details?.foodticket_refund_revenue}}</p>
+                                <p>Subscription Revenue : ${{dashboardData.revenue_details?.subscription_revenue}}</p>
+                                <p>Subscription Refund :
+                                        ${{dashboardData.revenue_details?.subscription_refund_revenue}}</p>
+                                <p>Winning Bid Fee Revenue :
+                                        ${{dashboardData.revenue_details?.winning_bid_fee_revenue}}</p>
+                                <p>Winning Bid Fee Refund :
+                                        ${{dashboardData.revenue_details?.winning_bid_fee_refund_revenue}}</p>
+                        </div>
+                        <div class="modal-footer">
+                                <button type="button" data-dismiss="modal" class="btn btn-outline-dark">OK</button>
+                        </div>
+                </div>
+        </div>
+</div>

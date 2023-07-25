@@ -1,0 +1,174 @@
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex bd-highlight align-items-center justify-content-between">
+            <div class="p-2 flex-fill w-100 bd-highlight">
+                <h5 class="h5-food m-0">Add Food Ticket - {{eventName}}</h5>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row pt-3">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <button [disabled]="enable(1)" (click)="setTicketType(1)" class="nav-item nav-link active" id="nav-food-tab"
+                            data-toggle="tab" href="#nav-food" role="tab" aria-controls="nav-food" aria-selected="true">Food</button>
+                    </div>
+                </nav>
+                <div class="tab-content border-0" id="nav-tabContent">
+                    <app-ticket-type [eventId]="eventId" (giftTicket)='giftTicket($event)' (deleteTicket)='deleteTicket($event)'
+                        (formValue)='save($event)' (editValue)='edit($event)' (ticketFormValue)='saveTicket($event)'
+                        (ticketGroupValue)='ticketGroupModal($event)' class="tab-pane fade show active" id="nav-food"
+                        role="tabpanel" aria-labelledby="nav-food-tab"></app-ticket-type>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="disableContent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-medium modal_width">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Food Tickets</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    x
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this Ticket Group.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-outline-dark" (click)="deleteGroup()">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="giftContent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-medium modal_width">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Send Food Tickets</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    x
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Enter the sets and email address to whom you would like to share the Food Tickets to.</p>
+                <form class="form-inline" #form="ngForm" (ngSubmit)="giftTo(form)">
+
+                    <div class="form-group pt-3">
+                        <label class="font-weight-bold w-100p" for="inputPassword6">Sets</label>
+                        <input ngModel name="quantity" #quantity id="inputPassword6" class="form-control mx-sm-3"
+                            aria-describedby="passwordHelpInline" required pattern="^[0-9]*$">
+                        <small class="text-danger" *ngIf="form.controls.quantity?.errors?.required && ( form.controls.quantity.touched || form.submitted)">This
+                            field is required
+                        </small>
+                        <small class="text-danger" *ngIf="form.controls.quantity?.errors?.pattern && ( form.controls.quantity.touched || form.submitted)">Only
+                            numbers are allowed
+                        </small>
+                    </div>
+                    <div class="form-group pt-3">
+                        <label class="font-weight-bold w-100p" for="inputPassword6">Email Address</label>
+                        <input ngModel name="email" #email id="inputPassword6" class="form-control mx-sm-3"
+                            aria-describedby="passwordHelpInline" required email>
+                        <small class="text-danger" *ngIf="form.controls.email?.invalid && !form.controls.email?.errors?.required && ( form.controls.email.touched || form.submitted)">This
+                            field is invalid
+                        </small>
+                        <small class="text-danger" *ngIf="form.controls.email?.errors?.required && ( form.controls.email.touched || form.submitted)">This
+                            field is required
+                        </small>
+                    </div>
+                    <div class="col-12 pt-2 align-self-end">
+                    <div class="form-group pt-3">
+                        <button type="submit" class="btn btn-outline-dark mr-2">send</button>
+                        <button data-dismiss="modal" class="btn btn-outline-dark">cancel</button>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div (click)="calculatePricePerTicket()" class="modal fade" id="ticketGroupContent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-medium modal_width">
+        <div class="modal-content modal-form">
+            <div class="modal-header">
+                <h3>Add Food Tickets</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    x
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="ticketGroupForm" (ngSubmit)="addTicketGroup()">
+                    <div class="row m-3 pt-2 pb-2">
+                        <div class="col-12 col-md-3 pt-2">
+                            <label class="text-nowrap" for="inputEmail4">Ticket Name</label>
+                            <input (keyup)="calculatePricePerTicket()" class="form-control" maxlength="50" formControlName="name" type="text">
+                            <small class="text-danger" *ngIf="ticketGroupForm.get('name').touched && ticketGroupForm.get('name').hasError('required')">This
+                                field is required.</small>
+                        </div>
+                        <div class="col-12 col-md-3 pt-2">
+                            <label class="text-nowrap" for="inputEmail4">Quantity</label>
+                            <input (keyup)="calculatePricePerTicket()" maxlength="10" class="form-control"
+                                formControlName="quantity" type="text">
+
+                            <small class="text-danger" *ngIf="ticketGroupForm.get('quantity').touched && ticketGroupForm.get('quantity').hasError('required')">This
+                                field is required.</small>
+                            <small class="text-danger" *ngIf="ticketGroupForm.get('quantity').touched && ticketGroupForm.get('quantity').hasError('pattern')">Only
+                                numbers are allowed.</small>
+
+                        </div>
+                        <div class="col-12 col-md-3 pt-2">
+                            <label class="text-nowrap" for="inputEmail4">Cost</label>
+                            <input (keyup)="calculatePricePerTicket()" maxlength="20" class="form-control"
+                                formControlName="cost" type="number">
+                            <small class="text-danger" *ngIf="ticketGroupForm.get('cost').touched && ticketGroupForm.get('cost').hasError('required')">This
+                                field is required.</small>
+                            <small class="text-danger" *ngIf="ticketGroupForm.get('cost').touched && ticketGroupForm.get('cost').hasError('pattern')">Only
+                                whole numbers are allowed.</small>
+                        </div>
+                        <div class="col-12 col-md-3 pt-2">
+                            <label class="text-nowrap" for="inputEmail4">Price/Ticket</label>
+                            <input disabled class="form-control" formControlName="price_per_ticket" type="number">
+                        </div>
+
+                        <div class="col-12 col-md-3 pt-4">
+                            <label class="text-nowrap" for="inputEmail4">Limit to</label>
+                            <input (keyup)="calculatePricePerTicket()" class="form-control" formControlName="limit" maxlength="10" type="number">
+                           <small class="text-danger" *ngIf="ticketGroupForm.get('limit').touched && ticketGroupForm.get('limit').hasError('pattern')">Only
+                                numbers are allowed.</small>
+                        </div>
+                        <div class="col-12 col-md-4 pt-4">
+                            <label class="text-nowrap" for="inputEmail4">Available From</label>
+                            <div class="input-group">
+                                <p-calendar (keyup)="calculatePricePerTicket()" formControlName="from_date" showTime="true" hourFormat="12" class="time-picker"
+                                    showIcon="true"></p-calendar>
+                            </div>
+                            <small class="text-danger" *ngIf="ticketGroupForm.get('from_date').touched && ticketGroupForm.get('from_date').hasError('required')">This
+                                field is required.</small>
+                            <small class="text-danger" *ngIf="(ticketGroupForm.get('from_date').touched) && dateValidationMessage">From
+                                Date is greater than To Date</small>
+                        </div>
+                        <div class="col-12 col-md-4 pt-4">
+                            <label class="text-nowrap" for="inputEmail4">Available To</label>
+                            <div class="input-group">
+                                <p-calendar (keyup)="calculatePricePerTicket()" formControlName="to_date" showTime="true" hourFormat="12" class="time-picker"
+                                    showIcon="true"></p-calendar>
+                            </div>
+                            <small class="text-danger" *ngIf="ticketGroupForm.get('to_date').touched && ticketGroupForm.get('to_date').hasError('required')">This
+                                field is required.</small>
+
+                            <small class="text-danger" *ngIf="(ticketGroupForm.get('to_date').touched) && dateValidationMessage">From
+                                Date is greater than To Date</small>
+                        </div>
+                        <div class="col-12 align-self-end pt-4 mt-4 ">
+                            <button (click)="submit=true" type="submit" class="btn btn-rounded float-right btn-info mb-3 mr-2 w-100p">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

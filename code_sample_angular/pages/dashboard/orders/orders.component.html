@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex bd-highlight align-items-center justify-content-between">
+            <div class="p-2 flex-fill w-100 bd-highlight">
+                <h5 class="h5-food m-0">New Orders</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="card text-left bg-primary-food">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-sm m-0" id="datatables">
+                        <thead>
+                            <tr>
+                                <th>Order Id</th>
+                                <th>Catering Type</th>
+                                <th>Order Date</th>
+                                <th>Event Date</th>
+                                <th>User Name</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="totalOrdersList?.length != 0" class="body">
+                            <tr *ngFor="let each of totalOrdersList;index as i">
+                                <td>{{each.order_id}}</td>
+                                <td>{{each.service}}</td>
+                                <td>{{each.created_at | date}}</td>
+                                <td>{{each.event_date | date}}</td>
+                                <td>{{each.user_name}}</td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="totalOrdersList?.length == 0" class="b">
+                            <tr>
+                                <td *ngIf="!noDataStyle" style="height:200px" colspan="5" class="no-data-available text-center"></td>
+                                <td *ngIf="noDataStyle" colspan="5" class="no-data-available text-center">No data!</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

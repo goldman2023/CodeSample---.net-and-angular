@@ -1,0 +1,88 @@
+<div class="row">
+  <div class="col-12 col-sm-6 col-xl">
+      <div class="d-flex bd-highlight align-items-center justify-content-between">
+          <div class="p-2 flex-fill w-100 bd-highlight">
+              <h5 *ngIf="!connected" class="h5-food m-0">Create Stripe account</h5>
+              <h5 *ngIf="connected" class="h5-food m-0">Edit Stripe account</h5>
+          </div>
+          <div class="p-2 flex-shrink-1  bd-highlight"></div>
+      </div>
+  </div>
+</div>
+<div class="row p-3">
+  <div class="col-12">
+    <form [formGroup]="form" (ngSubmit)="createToken()">
+      <div class="form-row">
+        <div class="col-12 col-sm-6 col-xl-6 mt-2">
+          <label for="inputEmail4">First Name</label>
+          <input class="form-control" formControlName="first_name" maxlength="100" type="text">
+          <small class="text-danger" *ngIf="form.get('first_name').touched && form.get('first_name').hasError('required')">
+            First Name is required
+          </small>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-6 mt-2">
+          <label for="inputEmail4">Last Name</label>
+          <input class="form-control" formControlName="last_name" maxlength="100" type="text">
+          <small class="text-danger" *ngIf="form.get('last_name').touched && form.get('last_name').hasError('required')">
+            Last Name is required
+          </small>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-6 mt-2">
+          <label for="inputEmail4">SSN last 4</label>
+          <input class="form-control" formControlName="ssn_last_4" type="text">
+          <small class="text-danger" *ngIf="form.get('ssn_last_4').touched && form.get('ssn_last_4').hasError('required')">
+            SSN Last 4 is required
+          </small>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-6 mt-2">
+          <label for="inputEmail4">Personal ID Number</label>
+          <input class="form-control" formControlName="personal_id_number" type="text">
+          <small class="text-danger" *ngIf="form.get('personal_id_number').touched && form.get('personal_id_number').hasError('required')">
+            Personal ID Number is required
+          </small>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-6 mt-2">
+          <label for="inputEmail4">Phone Number</label>
+          <input class="form-control" formControlName="phone_number" maxlength="100" type="text">
+          <small class="text-danger" *ngIf="form.get('phone_number').touched && form.get('phone_number').hasError('required')">
+            Phone Number is required
+          </small>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-6 mt-2">
+          <label for="inputEmail4">Location</label>
+          <input placeholder="" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" formControlName="location_name" class="form-control" #search>
+          <small class="text-danger" *ngIf="form.get('location_name').touched && form.get('location_name').hasError('required')">
+            Location Name is required</small>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-6 mt-2">
+          <label for="inputEmail4">Routing Number</label>
+          <input class="form-control" formControlName="routing_number" maxlength="100" type="text">
+          <small class="text-danger" *ngIf="form.get('routing_number').touched && form.get('routing_number').hasError('required')">
+            Routing Number is required
+          </small>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-6 mt-2">
+          <label for="inputEmail4">Account Number</label>
+          <input class="form-control" formControlName="account_number" maxlength="100" type="text">
+          <small class="text-danger" *ngIf="form.get('account_number').touched && form.get('account_number').hasError('required')">
+            Account Number is required
+          </small>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-6 mt-2">
+          <label for="inputEmail4">Date of Birth</label>
+          <input class="form-control" formControlName="dob" maxlength="100" type="date">
+          <small class="text-danger" *ngIf="form.get('dob').touched && form.get('dob').hasError('required')">
+            Date of Birth is required
+          </small>
+        </div>
+
+        <div class="col-12 mt-4">
+          <button *ngIf="!connected" (click)="submit=true" type="submit" class="btn btn-rounded btn-info mb-3 mr-2 w-100p" [disabled]="!submitted">Save</button>
+          <button *ngIf="connected" (click)="submit=true" type="submit" class="btn btn-rounded btn-info mb-3 mr-2 w-100p" [disabled]="!submitted">Update</button>
+          <button type="button" [routerLink]="['/events/organizer_event']" class="btn btn-rounded btn-info mb-3 mr-2 w-100p">Cancel</button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>
